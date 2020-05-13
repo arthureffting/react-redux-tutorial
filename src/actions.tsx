@@ -1,20 +1,18 @@
 import {Dispatch} from "react";
 
 export enum AuthenticationActions {
-    LOGIN="LOGIN",
-    LOGOUT="LOGOUT",
+    LOGIN = "LOGIN",
+    LOGOUT = "LOGOUT",
 }
 
 export enum ViewActions {
-    SET_LOADING="SET_LOADING",
+    SET_LOADING = "SET_LOADING",
 }
 
 export const setLoading = (loading: boolean) => {
     return {
         type: ViewActions.SET_LOADING,
-        payload: {
-            loading: loading
-        }
+        loading: loading
     }
 }
 
@@ -23,18 +21,24 @@ export const requestLogin = (username: string, password: string) => {
         dispatch(setLoading(true))
         authenticate(username, password)
             .then(isSuccessfull => {
-                dispatch({
-                    type: isSuccessfull ? AuthenticationActions.LOGIN : AuthenticationActions.LOGOUT,
-                    payload: {
-                        username: username
-                    }
-                })
+                if (isSuccessfull)
+                    dispatch(login(username))
+                else
+                    dispatch(logout())
                 dispatch(setLoading(false))
             })
     }
 }
 
-export const requestLogout = () => {
+
+export const login = (username: string) => {
+    return {
+        type: AuthenticationActions.LOGIN,
+        username: username
+    }
+}
+
+export const logout = () => {
     return {
         type: AuthenticationActions.LOGOUT
     }

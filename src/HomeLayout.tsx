@@ -55,8 +55,8 @@ const ButtonLayout: React.FunctionComponent<ButtonProps & WithStyles<typeof styl
 const Button = withStyles(styles)(ButtonLayout)
 
 interface HomeLayoutProps {
-    login: (username: string, password: string) => void,
-    logout: () => void,
+    onLogin: (username: string, password: string) => void,
+    onLogout: () => void,
     loading: boolean,
     authenticated: boolean,
     username?: string,
@@ -76,7 +76,7 @@ const HomeLayout: React.FunctionComponent<HomeLayoutProps & WithStyles<typeof st
         } else if (props.authenticated) {
             return <div className={classes.message}>
                 Welcome {props.username}!
-                <Button text={"Logout"} onClick={() => props.logout()}/>
+                <Button text={"Logout"} onClick={() => props.onLogout()}/>
             </div>
         } else {
             return <div className={classes.message}>
@@ -91,7 +91,7 @@ const HomeLayout: React.FunctionComponent<HomeLayoutProps & WithStyles<typeof st
                     onChange={(e) => setPassword(e.target.value)}
                     style={{marginTop: 12}}
                 />
-                <Button text={"Login"} onClick={() => props.login(name, password)}/>
+                <Button text={"Login"} onClick={() => props.onLogin(name, password)}/>
             </div>
         }
     }, [props.authenticated, name, props.username, props.loading])

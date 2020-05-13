@@ -9,7 +9,7 @@ export interface IViewState {
 
 export interface IAuthenticationState {
     authenticated: boolean,
-    username: string | undefined,
+    username?: string,
 }
 
 export interface IApplicationState {
@@ -23,9 +23,9 @@ export const initialState: IApplicationState = {
     },
     authentication: {
         authenticated: false,
-        username: undefined
     }
 }
+
 
 export const configureStore = (): Store<IApplicationState> => {
     const middlewares = [thunkMiddleware, createLogger()];

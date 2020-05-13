@@ -1,5 +1,5 @@
 import {IApplicationState} from "./store";
-import {requestLogin, requestLogout} from "./actions";
+import {logout, requestLogin} from "./actions";
 import React from "react";
 import {ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
@@ -16,11 +16,11 @@ const mapStateToProps = (state: IApplicationState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IApplicationState, void, AnyAction>) => {
     return {
-        login: (username: string, password: string) => {
+        onLogin: (username: string, password: string) => {
             dispatch(requestLogin(username, password))
         },
-        logout: () => {
-            dispatch(requestLogout())
+        onLogout: () => {
+            dispatch(logout())
         }
     }
 }

@@ -6,7 +6,7 @@ export const authenticationReducer = (state = initialState.authentication, actio
     switch (action.type) {
         case AuthenticationActions.LOGIN:
             return {
-                username: action.payload.username,
+                username: action.username,
                 authenticated: true,
             };
         case AuthenticationActions.LOGOUT:
@@ -20,12 +20,7 @@ export const authenticationReducer = (state = initialState.authentication, actio
 };
 
 export const viewReducer = (state = initialState.view, action: AnyAction): IViewState => {
-    switch (action.type) {
-        case ViewActions.SET_LOADING:
-            return {
-                loading: action.payload.loading
-            };
-        default:
-            return state
-    }
+    return {
+        loading: action.loading
+    };
 };
